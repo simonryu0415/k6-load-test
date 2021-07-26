@@ -15,6 +15,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      - name: Set up environment
+        run: |
+          python -m pip install --upgrade pip
+          pip install matplotlib
+          pip install pandas
       - name: Run local k6 test
         uses: k6io/action@v0.2.0
         with: 
