@@ -1,0 +1,25 @@
+name: k6 Load testing workflow
+on: 
+  schedule:
+    - cron: */15 * * * *
+  workflow_dispatch
+
+jobs:
+  test:
+    name: k6 Load Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Run local k6 test
+        uses: k6io/action@v0.2.0
+        with: 
+          filename: tests/01-test.js
+          # flags: --out influxdb=http://6ac92cb3a0d7.ngrok.io
+      - name: Update test report
+        run: |
+          report.py
