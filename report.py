@@ -13,6 +13,8 @@ with open("test_summary.json") as f_i, open("data.json", "r+") as f_o:
      f_o.seek(0)
      json.dump(data_o, f_o, sort_keys=True, indent=4)
 
+     print(json.dumps(data_o, indent=4))
+
      # Plot
      df = pd.DataFrame(data_o).T
      df.index = pd.to_datetime(df.index)
@@ -26,7 +28,7 @@ with open("test_summary.json") as f_i, open("data.json", "r+") as f_o:
           df_api = df.filter(like=api).rename(columns=lambda x: x.split('-')[-1])
           axs[i].plot(df_api, marker="o")
           axs[i].legend(list(df_api), fontsize=6)
-          axs[i].set_title(api, fontsize=10)
+          axs[i].set_title(f"{api} APIs", fontsize=10)
 
      fig.text(0.04, 0.5, 'Latency (ms)', va='center', rotation='vertical')
      plt.xticks(fontsize=6,rotation=45)
