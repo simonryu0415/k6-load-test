@@ -1,0 +1,24 @@
+name: Merge freeze workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      freeze:
+        description: 'Freeze (true or false)'
+        required: true
+        default: 'true' 
+      username:
+        description: 'Username'
+        required: true
+        default: 'QA'
+
+jobs:
+  mergefreeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Freeze/unfreeze
+        run: |
+          curl -d "frozen=${{ github.event.inputs.freeze }}&user_name=${{ github.event.inputs.username }}" -X POST https://www.mergefreeze.com/api/branches/ecoation/b2-data-model/master/?access_token=751e19f8-7556-4bd6-9957-561f70053519
+          curl -d "frozen=${{ github.event.inputs.freeze }}&user_name=${{ github.event.inputs.username }}" -X POST https://www.mergefreeze.com/api/branches/ecoation/b2-airflow/dev/?access_token=6561f636-0c3e-4f7d-8999-da7df10e082c
+          curl -d "frozen=${{ github.event.inputs.freeze }}&user_name=${{ github.event.inputs.username }}" -X POST https://www.mergefreeze.com/api/branches/ecoation/b2-devops/dev/?access_token=b9368b41-e349-45cf-ae2b-fecbb290de9f
+          curl -d "frozen=${{ github.event.inputs.freeze }}&user_name=${{ github.event.inputs.username }}" -X POST https://www.mergefreeze.com/api/branches/ecoation/b2-ui/dev/?access_token=5cd37fe1-748a-4854-8f45-ee75e66a35ab
