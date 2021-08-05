@@ -51,8 +51,8 @@ let getAllCropsinPhaseTrend = new Trend("custom_crop-get_all_crops_in_phase")
 
 export default function () {
   let response;
-  const URL = 'https://api-prod.ecoationsvc.io';
-  const cred = '{"email":"mucci_support@ecoation.com","password":"s4jo70l7eo"}';
+  const URL = 'https://api-stage.ecoationsvc.io';
+  const cred = '{"email":"mucci_support@ecoation.com","password":"!Ecoation1"}';
   const vars = {};  
 
   // Authentication
